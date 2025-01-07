@@ -1,53 +1,88 @@
-import Image from "next/image";
-//import { movies } from "@/data/movies";
-import Link from "next/link";//link usuar para navegar entre paginas
-import { fetchPopularMovies } from '@/utils/tmdbClient';
+"use client";
 
-export default async function Home() {
-  const movies = await fetchPopularMovies();
+import { useState, useEffect } from "react";
+
+import { Movie } from "@/interfaces/Movie";
+import SearchMovieForm from "@/components/containers/SearchMovieForm";
+import useMovies from "@/hooks/useMovies";
+import MovieGallery from "@/components/containers/MovieGallery";
+
+export default function Home() {
+  const [query, setQuery] = useState("");
+  const [querySearch, setQuerySearch] = useState("");
+  const {
+    movies,
+    loading,
+    error,
+    favoriteMovies,
+    toWatchMovies,
+    watched_movies,
+  } = useMovies(querySearch);
+
+  const [showFavorites, setShowFavorites] = useState(false);
+  const [showToWatch, setShowToWatch] = useState(false);
+  const [showWatched, setShowWatched] = useState(false);
+
+  const handleSearch = () => {
+    setQuerySearch(query);
+  };
 
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-8 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-8 gap-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       {/* Encabezado */}
       <header className="text-center">
         <h1 className="text-4xl font-bold mb-2">Movie Gallery</h1>
-        <p className="text-lg text-gray-500">
-          Explora y encuentra tus películas favoritas.
-        </p>
+        <p className="text-lg text-gray-500">Discover your favorite movies.</p>
       </header>
 
-      {/* Sección de Películas */}
-      <main className="grid grid-cols-2 md:grid-cols-4 gap-8">
-        {movies.results.map((movie: { id: number; title: string; poster_path: string }) => (
-          
-            <div
-              key={movie.id}
-              className="bg-gray-200 rounded-lg shadow-lg overflow-hidden"
-            >
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                width={500}
-                height={750}
-                className="w-full"
-              />
-              <Link
-                href={`/movie/${movie.id}`}
-                key={movie.id}
-                className="bg-gray-200 w-48 h-72 rounded-lg shadow-lg overflow-hidden"
-              >
+      {/* Barra de Búsqueda */}
 
-               <div className="p-4 text-center">
-                <h3 className="text-lg font-semibold text-orange-500 ">{movie.title}</h3>
-              </div> 
-              </Link>
-            </div>
-          
-        ))}
-      </main>
+      <SearchMovieForm
+        query={query}
+        setQuery={setQuery}
+        onSearch={handleSearch}
+      />
+      {loading && <p className="text-center">Cargando...</p>}
+      {error && <p className="text-center text-red-500">{error}</p>}
+
+      {/* Sección de Películas */}
+      {showFavorites && (
+        <MovieGallery
+          params={{
+            movies: favoriteMovies.favorite_movies,
+            title: "Favorites",
+          }}
+        />
+      )}
+      {showToWatch && (
+        <MovieGallery
+          params={{
+            movies: toWatchMovies.to_watch_movies,
+            title: "Movies to Watch",
+          }}
+        />
+      )}
+      {showWatched && (
+        <MovieGallery
+          params={{
+            movies: watched_movies.watched_movies,
+            title: "Watched Movies",
+          }}
+        />
+      )}
+      {!loading && !error && !showFavorites && !showToWatch && !showWatched && (
+        <MovieGallery
+          params={{
+            movies: movies,
+            title: "Popular Movies",
+          }}
+        />
+      )}
+
+      {/* Botones de Filtros */}
       {/* Footer */}
       <footer className="text-center text-sm text-gray-500">
-        © 2024 Movie Gallery. Todos los derechos reservados.
+        © 2024 Movie Gallery. All rights reserved.
       </footer>
     </div>
   );

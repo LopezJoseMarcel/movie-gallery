@@ -1,4 +1,4 @@
-// app/movie/[id]/page.tsx
+
 import Image from "next/image";
 import { fetchMovieDetails } from '@/utils/tmdbClient';
 
@@ -12,10 +12,6 @@ interface MoviePageProps {
     const { id } = await params; // Accedemos directamente al id
 
     const movie = await fetchMovieDetails(id);
-
-    //console.log("Movie Details", movie);
-
-    //onsole.log("movie: ", movie);
   
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-8">
@@ -46,6 +42,7 @@ interface MoviePageProps {
             "No disponible"
           }
         </p>
+        
       </div>
 
       <p className="text-lg text-gray-500 mt-4">{movie.overview}</p>

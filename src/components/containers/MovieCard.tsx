@@ -124,7 +124,7 @@ export default function MovieCard({ params, enabled }: movieCardProps) {
     setFavorite(
       favoriteMovies.favorite_movies.some((movie) => movie.id === params.id)
     );
-  }, [favoriteMovies]);
+  }, [favoriteMovies,params.id]);
 
   return (
     <div

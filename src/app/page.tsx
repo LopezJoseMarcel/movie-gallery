@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import { Movie } from "@/interfaces/Movie";
+
 import SearchMovieForm from "@/components/containers/SearchMovieForm";
 import useMovies from "@/hooks/useMovies";
 import MovieGallery from "@/components/containers/MovieGallery";

@@ -8,15 +8,15 @@ import useLocalStorage from "./useLocalStorage";
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
-     const [watched_movies, setWatched_movies] = useLocalStorage(
+     const [watched_movies] = useLocalStorage(
         "watched_movies",
         { watched_movies: [{ id: 0, title: "", poster_path: "" }] }
       );
-      const [favoriteMovies, setFavoriteMovies] = useLocalStorage(
+      const [favoriteMovies] = useLocalStorage(
         "FavoriteMovies",
         { favorite_movies: [{ id: 0, title: "", poster_path: "" }] }
       );
-      const [toWatchMovies, setToWatchMovies] = useLocalStorage("ToWatchMovies", {
+      const [toWatchMovies] = useLocalStorage("ToWatchMovies", {
         to_watch_movies: [{ id: 0, title: "", poster_path: "" }],
       });
     
@@ -43,3 +43,5 @@ import useLocalStorage from "./useLocalStorage";
 }
 
 export default useMovies;
+
+

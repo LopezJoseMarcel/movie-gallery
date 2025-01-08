@@ -17,12 +17,9 @@ export default function FavoritePage() {
 
   const [moviesList, setMovies] = useState<MoviesList | null>(null);
   const { favoriteMovies, toWatchMovies, watched_movies } = useMovies("");
-  const [updateKey, setUpdateKey] = useState(0);
 
-  //funcion para forzar el renderizado
-  const handleUpdate= () => {
-    setUpdateKey((preKey) => preKey + 1)
-  }
+
+  
  
   useEffect(() => {
     if (!favoriteMovies || !toWatchMovies || !watched_movies) return;

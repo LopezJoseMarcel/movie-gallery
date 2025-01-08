@@ -17,7 +17,13 @@ export default function FavoritePage() {
 
   const [moviesList, setMovies] = useState<MoviesList | null>(null);
   const { favoriteMovies, toWatchMovies, watched_movies } = useMovies("");
+  const [updateKey, setUpdateKey] = useState(0);
 
+  //funcion para forzar el renderizado
+  const handleUpdate= () => {
+    setUpdateKey((preKey) => preKey + 1)
+  }
+ 
   useEffect(() => {
     if (!favoriteMovies || !toWatchMovies || !watched_movies) return;
 
@@ -47,17 +53,19 @@ export default function FavoritePage() {
   }, [list_name, favoriteMovies, toWatchMovies, watched_movies]); // Dependencias
 
   return (
-    <>
-      {moviesList ? (
+    <section className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-8 gap-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+       {moviesList ? (
         <MovieGallery
           params={{
-            movies: moviesList.list,
+            movies: moviesList.list.filter(movie => movie.id != 0),
             title: moviesList.title,
-          }}
+            enabled: false
+          }
+        }
         />
       ) : (
         <h1 className="text-4xl font-bold mb-2">Sorry, empty list !!</h1>
       )}
-    </>
+    </section> 
   );
 }

@@ -26,16 +26,16 @@ interface MoviePageProps {
 
       <div className="mt-4 text-center">
         <p className="text-sm text-gray-400">
-          <strong>Géneros:</strong>{" "}
+          <strong>Genre:</strong>{" "}
           {
             movie.genres.map((genre : {name: string;}) => genre.name).join(", ")
           }
         </p>
         <p className="text-sm text-gray-400">
-          <strong>Duración:</strong> {movie.runtime} minutos
+          <strong>Running time:</strong> {movie.runtime} minutos
         </p>
         <p className="text-sm text-gray-400">
-          <strong>Presupuesto:</strong>{" "}
+          <strong>Budget:</strong>{" "}
           {movie.budget > 0  ? 
             `$ ${movie.budget}`
             :
@@ -46,8 +46,8 @@ interface MoviePageProps {
       </div>
 
       <p className="text-lg text-gray-500 mt-4">{movie.overview}</p>
-      <p className="text-sm text-gray-400 mt-2">Lanzada el: {movie.release_date}</p>
-      <p className="text-sm text-gray-400">Calificación: {movie.vote_average}</p>
+      <p className="text-sm text-gray-400 mt-2">Released: {movie.release_date}</p>
+      <p className="text-sm text-gray-400">Rating: {movie.vote_average}</p>
     </div>
     );
   }

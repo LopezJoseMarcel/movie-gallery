@@ -14,14 +14,8 @@ export default function Home() {
     movies,
     loading,
     error,
-    favoriteMovies,
-    toWatchMovies,
-    watched_movies,
   } = useMovies(querySearch);
 
-  const [showFavorites, setShowFavorites] = useState(false);
-  const [showToWatch, setShowToWatch] = useState(false);
-  const [showWatched, setShowWatched] = useState(false);
 
   const handleSearch = () => {
     setQuerySearch(query);
@@ -46,38 +40,15 @@ export default function Home() {
       {error && <p className="text-center text-red-500">{error}</p>}
 
       {/* Sección de Películas */}
-      {showFavorites && (
-        <MovieGallery
-          params={{
-            movies: favoriteMovies.favorite_movies,
-            title: "Favorites",
-          }}
-        />
-      )}
-      {showToWatch && (
-        <MovieGallery
-          params={{
-            movies: toWatchMovies.to_watch_movies,
-            title: "Movies to Watch",
-          }}
-        />
-      )}
-      {showWatched && (
-        <MovieGallery
-          params={{
-            movies: watched_movies.watched_movies,
-            title: "Watched Movies",
-          }}
-        />
-      )}
-      {!loading && !error && !showFavorites && !showToWatch && !showWatched && (
+      
         <MovieGallery
           params={{
             movies: movies,
             title: "Popular Movies",
+            enabled: true
           }}
         />
-      )}
+     
 
       {/* Botones de Filtros */}
       {/* Footer */}

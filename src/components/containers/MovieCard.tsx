@@ -12,13 +12,10 @@ import { FaCircleMinus } from "react-icons/fa6";
 
 interface movieCardProps {
   params: Movie;
+  enabled: boolean;
 }
 
-interface LocalStorage {
-  favorite_movies: [id: number];
-}
-
-export default function MovieCard({ params }: movieCardProps) {
+export default function MovieCard({ params, enabled }: movieCardProps) {
   const [watched_movies, setWatched_movies] = useLocalStorage(
     "watched_movies",
     { watched_movies: [{ id: 0, title: "", poster_path: "" }] }
@@ -114,12 +111,10 @@ export default function MovieCard({ params }: movieCardProps) {
               title: params.title,
               poster_path: params.poster_path,
             },
-          ] 
+          ],
     };
     setWatched_movies(newWatchedMovies);
     setIsWatched(!isWatched); // Update isFavorite based on click
-
-    
   };
   //end watched movies
 
@@ -136,13 +131,18 @@ export default function MovieCard({ params }: movieCardProps) {
       key={params.id}
       className="bg-gray-200 rounded-lg shadow-lg overflow-hidden relative"
     >
-      <FaHeart
+      {enabled && (
+        <FaHeart
         color={isFavorite ? "orange" : "white"}
         className="absolute top-2 right-2 w-6 h-6 hover:animate-bounce "
         onClick={handleClickFavorite}
         title="Add to favorites"
       />
-      <section
+      )
+      }
+      {
+        enabled && (
+          <section
         id="option-add"
         className="absolute top-2 left-2 flex  flex-col items-center gap-4	 "
       >
@@ -176,6 +176,9 @@ export default function MovieCard({ params }: movieCardProps) {
           </div>
         )}
       </section>
+        )
+      }
+      
 
       <Image
         src={`https://image.tmdb.org/t/p/w500${params.poster_path}`}

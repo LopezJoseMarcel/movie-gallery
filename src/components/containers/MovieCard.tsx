@@ -36,10 +36,11 @@ export default function MovieCard({ params, enabled }: movieCardProps) {
 
   //favorite movies
 
-  isFavorite === null &&
-    setFavorite(
-      favoriteMovies.favorite_movies.some((movie) => movie.id === params.id)
-    );
+     if (isFavorite === null) {
+      setFavorite(
+        favoriteMovies.favorite_movies.some((movie) => movie.id === params.id)
+      );
+    }
   const handleClickFavorite = () => {
     const newFavoriteMovies = {
       favorite_movies: favoriteMovies.favorite_movies.some(
@@ -64,10 +65,12 @@ export default function MovieCard({ params, enabled }: movieCardProps) {
 
   //to watch movies
 
-  isToWatch === null &&
-    setIsToWatch(
-      toWatchMovies.to_watch_movies.some((movie) => movie.id === params.id)
-    );
+    if (isToWatch === null) {
+      setIsToWatch(
+        toWatchMovies.to_watch_movies.some((movie) => movie.id === params.id)
+      );
+    }
+
   const handleClickToWatch = () => {
     const newToWatchMovies = {
       to_watch_movies: toWatchMovies.to_watch_movies.some(
@@ -92,10 +95,13 @@ export default function MovieCard({ params, enabled }: movieCardProps) {
 
   //watched movies
 
-  isWatched === null &&
-    setIsWatched(
-      watched_movies.watched_movies.some((movie) => movie.id === params.id)
-    );
+  
+    if (isWatched === null) {
+      setIsWatched(
+        watched_movies.watched_movies.some((movie) => movie.id === params.id)
+      );
+    }
+    
   const handleClickWatched_movies = () => {
     const newWatchedMovies = {
       watched_movies: watched_movies.watched_movies.some(

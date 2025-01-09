@@ -43,7 +43,7 @@ export default function SearchMovieForm({
             <ButtonIcon
               params={{
                 type: "submit",
-                
+                label:"Search",
                 icon: <FaSearch />,
               }}
             />

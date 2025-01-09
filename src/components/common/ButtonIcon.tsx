@@ -14,7 +14,7 @@ export default function ButtonIcon({ params }: IconButtonProps) {
   sm:px-4 sm:py-2 sm:text-base"
       >
         {params.label}
-        {params.icon}
+        <span className="hidden sm:block">{params.icon}</span>
       </button>
     </>
   );

@@ -168,17 +168,17 @@ export default function MovieCard({ params, enabled }: movieCardProps) {
 
           {showOption && (
             <div id="options" className="flex flex-col items-start gap-4">
-            <div className="flex items-center bg-orange-600	p-1 rounded-md ml-0">
+            <div onClick={handleClickToWatch} className="flex items-center bg-orange-600	p-1 rounded-md ml-0">
               <FaBookmark 
                 color={isToWatch ? "#FFEB00" : "white"} 
-                onClick={handleClickToWatch} 
+                 
               />
               <span className="text-xs ml-1">Add Watch List</span> 
             </div>
-            <div className="flex items-start bg-orange-600	p-1 rounded-md ml-0	">
+            <div onClick={handleClickWatched_movies} className="flex items-start bg-orange-600	p-1 rounded-md ml-0	">
               <FaEye 
                 color={isWatched ? "#FFEB00" : "white"} 
-                onClick={handleClickWatched_movies} 
+                
               />
               <span className="text-xs ml-1">Add Watched List</span> 
             </div>

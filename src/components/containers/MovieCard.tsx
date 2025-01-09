@@ -36,11 +36,11 @@ export default function MovieCard({ params, enabled }: movieCardProps) {
 
   //favorite movies
 
-     if (isFavorite === null) {
-      setFavorite(
-        favoriteMovies.favorite_movies.some((movie) => movie.id === params.id)
-      );
-    }
+  if (isFavorite === null) {
+    setFavorite(
+      favoriteMovies.favorite_movies.some((movie) => movie.id === params.id)
+    );
+  }
   const handleClickFavorite = () => {
     const newFavoriteMovies = {
       favorite_movies: favoriteMovies.favorite_movies.some(
@@ -65,11 +65,11 @@ export default function MovieCard({ params, enabled }: movieCardProps) {
 
   //to watch movies
 
-    if (isToWatch === null) {
-      setIsToWatch(
-        toWatchMovies.to_watch_movies.some((movie) => movie.id === params.id)
-      );
-    }
+  if (isToWatch === null) {
+    setIsToWatch(
+      toWatchMovies.to_watch_movies.some((movie) => movie.id === params.id)
+    );
+  }
 
   const handleClickToWatch = () => {
     const newToWatchMovies = {
@@ -95,13 +95,12 @@ export default function MovieCard({ params, enabled }: movieCardProps) {
 
   //watched movies
 
-  
-    if (isWatched === null) {
-      setIsWatched(
-        watched_movies.watched_movies.some((movie) => movie.id === params.id)
-      );
-    }
-    
+  if (isWatched === null) {
+    setIsWatched(
+      watched_movies.watched_movies.some((movie) => movie.id === params.id)
+    );
+  }
+
   const handleClickWatched_movies = () => {
     const newWatchedMovies = {
       watched_movies: watched_movies.watched_movies.some(
@@ -130,7 +129,7 @@ export default function MovieCard({ params, enabled }: movieCardProps) {
     setFavorite(
       favoriteMovies.favorite_movies.some((movie) => movie.id === params.id)
     );
-  }, [favoriteMovies,params.id]);
+  }, [favoriteMovies, params.id]);
 
   return (
     <div
@@ -139,52 +138,54 @@ export default function MovieCard({ params, enabled }: movieCardProps) {
     >
       {enabled && (
         <FaHeart
-        color={isFavorite ? "orange" : "white"}
-        className="absolute top-2 right-2 w-6 h-6 hover:animate-bounce "
-        onClick={handleClickFavorite}
-        title="Add to favorites"
-      />
-      )
-      }
-      {
-        enabled && (
-          <section
-        id="option-add"
-        className="absolute top-2 left-2 flex  flex-col items-center gap-4	 "
-      >
-        {!showOption && (
-          <FaCirclePlus
-            color="white"
-            className="w-6 h-6 hover:rotate-90 transition-all duration-200s"
-            title="Add to list"
-            onClick={() => setShowOption(!showOption)}
-          />
-        )}
-        {showOption && (
-          <FaCircleMinus
-            color="white"
-            className="w-6 h-6 "
-            title="Add to list"
-            onClick={() => setShowOption(!showOption)}
-          />
-        )}
+          color={isFavorite ? "orange" : "white"}
+          className="absolute top-2 right-2 w-6 h-6 hover:animate-bounce "
+          onClick={handleClickFavorite}
+          title="Add to favorites"
+        />
+      )}
+      {enabled && (
+        <section
+          id="option-add"
+          className="absolute top-2 left-2 flex  flex-col items-start gap-4  "
+        >
+          {!showOption && (
+            <FaCirclePlus
+              color="white"
+              className="w-6 h-6 hover:rotate-90 transition-all duration-200s"
+              title="Add to list"
+              onClick={() => setShowOption(!showOption)}
+            />
+          )}
+          {showOption && (
+            <FaCircleMinus
+              color="white"
+              className="w-6 h-6 "
+              title="Add to list"
+              onClick={() => setShowOption(!showOption)}
+            />
+          )}
 
-        {showOption && (
-          <div className="flex  flex-col items-center gap-4">
-            <FaBookmark
-              color={isToWatch ? "orange" : "white"}
-              onClick={handleClickToWatch}
-            />
-            <FaEye
-              color={isWatched ? "orange" : "white"}
-              onClick={handleClickWatched_movies}
-            />
+          {showOption && (
+            <div id="options" className="flex flex-col items-start gap-4">
+            <div className="flex items-center bg-orange-600	p-1 rounded-md ml-0">
+              <FaBookmark 
+                color={isToWatch ? "#FFEB00" : "white"} 
+                onClick={handleClickToWatch} 
+              />
+              <span className="text-xs ml-1">Add Watch List</span> 
+            </div>
+            <div className="flex items-start bg-orange-600	p-1 rounded-md ml-0	">
+              <FaEye 
+                color={isWatched ? "#FFEB00" : "white"} 
+                onClick={handleClickWatched_movies} 
+              />
+              <span className="text-xs ml-1">Add Watched List</span> 
+            </div>
           </div>
-        )}
-      </section>
-        )
-      }
-      
+          )}
+        </section>
+      )}
 
       <Image
         src={`https://image.tmdb.org/t/p/w500${params.poster_path}`}

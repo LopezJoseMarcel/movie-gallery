@@ -134,7 +134,7 @@ export default function MovieCard({ params, enabled }: movieCardProps) {
   return (
     <div
       key={params.id}
-      className="bg-gray-200 rounded-lg shadow-lg overflow-hidden relative"
+      className="bg-white rounded-lg shadow-lg overflow-hidden relative"
     >
       {enabled && (
         <FaHeart

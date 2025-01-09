@@ -17,9 +17,6 @@ export default function FavoritePage() {
 
   const [moviesList, setMovies] = useState<MoviesList | null>(null);
   const { favoriteMovies, toWatchMovies, watched_movies } = useMovies("");
-
-
-  
  
   useEffect(() => {
     if (!favoriteMovies || !toWatchMovies || !watched_movies) return;

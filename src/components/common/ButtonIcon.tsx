@@ -10,10 +10,11 @@ export default function ButtonIcon({ params }: IconButtonProps) {
     <>
       <button
         type={params.type}
-        className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 mt-2 flex justify-center items-center gap-2"
+        className="bg-orange-500 text-white px-3 py-1 text-sm rounded-lg hover:bg-orange-600 mt-2 flex justify-center items-center gap-2 
+  sm:px-4 sm:py-2 sm:text-base"
       >
         {params.label}
-        {params.icon} 
+        {params.icon}
       </button>
     </>
   );
